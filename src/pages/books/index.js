@@ -1,9 +1,12 @@
+import CenterMode from "../../component/base/CustomImageSlider";
 import ListBooks from "../../component/base/ListBooks";
 
 const Books = () => {
   return (
     <div>
-      <div>slider</div>
+      <div>
+        <CenterMode />
+      </div>
       <div>
         <ListBooks />
       </div>
