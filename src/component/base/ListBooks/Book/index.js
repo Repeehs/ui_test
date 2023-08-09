@@ -1,9 +1,11 @@
 import { styled } from "styled-components";
+import { timeSince } from "../../../../utils/timeSince";
 
 const BookContainer = styled('div')`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 
   .img-box {
     height: 50px;
@@ -55,11 +57,11 @@ const Book = (props) => {
   return (
     <BookContainer>
       <div className="img-box">
-        <img src={data.image} alt={data.title} />
+        <img src={data.thumb} alt={data.title} />
       </div>
       <h2 className="book-title">{data.title}</h2>
       <p className="part-number">{data.parts} tập</p>
-      <p className="time">{data.create} phuts truoc</p>
+      <p className="time">{timeSince(data.updated_at)}</p>
     </BookContainer>
   );
 };

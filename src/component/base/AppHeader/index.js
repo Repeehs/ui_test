@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Login'];
+const navItems = ['Dang Nhap'];
 
 const AppHeader = (props)  => {
   const { window } = props;
@@ -48,7 +48,7 @@ const AppHeader = (props)  => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ position: 'relative' }}>
+      <AppBar component="nav" sx={{ position: 'relative', background: '#6b9876' }}>
         <Toolbar>
           <IconButton
             color="inherit"
