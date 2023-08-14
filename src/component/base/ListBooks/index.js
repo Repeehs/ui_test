@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import BookModal from "../modal/BookModal";
 import { changePage } from "../../../containers/Book/actions";
+import BookModalUpdate from "../modal/BookModalUpdate";
 
 const ListBookContainer = styled("div")`
   .block-header {
@@ -29,6 +30,9 @@ const ListBookContainer = styled("div")`
 
 const ListBooks = () => {
   const [openCreate, setOpenCreate] = useState(false);
+  const [openEditDelete, setOpenEditDelete] = useState(false);
+  const [currentBook, setCurrentBook] = useState(null);
+
   const dispatch = useDispatch();
 
   const { books, pages } = useSelector((state) => state.bookReducer);
@@ -39,6 +43,18 @@ const ListBooks = () => {
   const handlerOpenCreateModal = (value) => {
     setOpenCreate(value);
   };
+
+  const onClickHandler = (item) => {
+    console.log('item', item)
+    setCurrentBook(item);
+    setOpenEditDelete(true);
+  };
+
+  const handlerOpenEDModal = (value) => {
+    setOpenEditDelete(value);
+    setCurrentBook(null);
+  };
+
   return (
     <ListBookContainer>
       <div class="block-header">
@@ -50,7 +66,7 @@ const ListBooks = () => {
         </div>
       </div>
       {books?.map((item) => (
-        <Book data={item} />
+        <Book data={item} click={onClickHandler} />
       ))}
       {pages?.total > 1 && (
         <CustomPagination
@@ -60,6 +76,7 @@ const ListBooks = () => {
         />
       )}
       <BookModal isOpen={openCreate} setOpen={handlerOpenCreateModal} />
+      {currentBook && <BookModalUpdate isOpen={openEditDelete} setOpen={handlerOpenEDModal} book={currentBook} />}
     </ListBookContainer>
   );
 };

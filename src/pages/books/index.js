@@ -17,7 +17,7 @@ const Books = () => {
 
   useEffect(() => {
     dispatch(getBook(pages?.current))
-  }, [pages])
+  }, [pages?.current])
   return (
     <BooksContainer>
       <Grid container spacing={2}>

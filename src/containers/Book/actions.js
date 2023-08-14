@@ -20,3 +20,14 @@ export const changePage = (page) => ({
   type: BOOK.CHANGE_PAGE,
   page,
 })
+
+export const deleteBook = (id) => ({
+  type: BOOK.DELETE_BOOK,
+  id,
+})
+
+export const updateBook = (id, data) => ({
+  type: BOOK.EDIT_BOOK,
+  id,
+  data
+})

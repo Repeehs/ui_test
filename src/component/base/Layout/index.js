@@ -1,16 +1,19 @@
 import { styled } from "styled-components";
 import AppHeader from "../AppHeader";
+import { useAppSelector } from "../../../containers/store";
 
 const LayoutContainer = styled("div")`
   position: relative;
-  padding: 0 20px;
+  ${props => props.isAuth && 'padding: 0 20px;'}
 `;
 const Layout = (props) => {
+  const isAuth = useAppSelector((state) => state.authReducer.isAuth);
+
   return (
     <div style={{}}>
       <AppHeader />
 
-      <LayoutContainer>{props.children}</LayoutContainer>
+      <LayoutContainer isAuth={isAuth}>{props.children}</LayoutContainer>
     </div>
   );
 };

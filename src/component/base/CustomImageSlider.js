@@ -58,16 +58,13 @@ const SwiperContainer = styled("div")`
 export default function CustomImageSlider(props) {
   const { listBook } = props;
   const [currentBook, setCurrentBook] = useState(listBook[0]);
-  useEffect(() => {
-    if(listBook?.length > 0) {
-      setCurrentBook(listBook[0])
-    }
-  })
   return (
     <SwiperContainer>
       <div>
         <Swiper
-          onSlideChange={(swiper) => setCurrentBook(swiper.realIndex)}
+          onSlideChange={(swiper) => {
+            setCurrentBook(swiper.realIndex)
+          }}
           effect={"coverflow"}
           grabCursor={true}
           slidesPerView={3}
@@ -97,9 +94,9 @@ export default function CustomImageSlider(props) {
         </Swiper>
       </div>
       <div className="content">
-        <h2 className="title">{currentBook?.title}</h2>
+        <h2 className="title">{listBook[currentBook]?.title}</h2>
         <p className="description">
-          Tác giả <span>{currentBook.title}</span>
+          Tác giả <span>{listBook[currentBook]?.title}</span>
         </p>
         {/* <Button variant="text">Xem chi tiết</Button> */}
       </div>

@@ -11,7 +11,7 @@ export const listBook =  [
   },
   {
     updated_at: '2023-06-23T13:14:31.000Z',
-    title: "Người Tại đấu Phá Viết Nhật Ký, Nữ Chính Toàn Bộ Mộng!",
+    title: "Con Đường Bá Chủ",
     like: 2,
     id: 2,
     thumb:
@@ -22,7 +22,7 @@ export const listBook =  [
   },
   {
     updated_at: '2023-06-23T13:14:31.000Z',
-    title: "Người Tại đấu Phá Viết Nhật Ký, Nữ Chính Toàn Bộ Mộng!",
+    title: "Ta Từ Từ Trong Bụng Mẹ Liền Bắt đầu Tu Luyện",
     like: 2,
     id: 3,
     thumb:
@@ -32,7 +32,7 @@ export const listBook =  [
   },
   {
     updated_at: '2023-06-23T13:14:31.000Z',
-    title: "Người Tại đấu Phá Viết Nhật Ký, Nữ Chính Toàn Bộ Mộng!",
+    title: "Bắt Đầu Đánh Dấu Hoang Cổ Thánh Thể",
     like: 2,
     id: 1,
     thumb:
@@ -42,7 +42,7 @@ export const listBook =  [
   },
   {
     updated_at: '2023-06-23T13:14:31.000Z',
-    title: "Người Tại đấu Phá Viết Nhật Ký, Nữ Chính Toàn Bộ Mộng!",
+    title: "Phản Phái Ta, Thật Không Muốn Cho Nữ Chủ Mang Thai!",
     like: 2,
     id: 2,
     thumb:
@@ -53,7 +53,7 @@ export const listBook =  [
   },
   {
     updated_at: '2023-06-23T13:14:31.000Z',
-    title: "Người Tại đấu Phá Viết Nhật Ký, Nữ Chính Toàn Bộ Mộng!",
+    title: "Hunter: Ta Thật Không Phải Là Trừ Niệm Sư",
     like: 2,
     id: 3,
     thumb:

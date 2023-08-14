@@ -53,11 +53,11 @@ const BookContainer = styled("div")`
 `;
 
 const Book = (props) => {
-  const { data } = props;
+  const { data, click } = props;
   const thumb =
     "https://truyenaudiocv.org/uploads/manga/nguoi-tai-dau-pha-viet-nhat-ky-nu-chinh-toan-bo-mong/cover/cover_thumb.jpg";
   return (
-    <BookContainer>
+    <BookContainer onClick={() => click(data)}>
       <div className="img-box">
         <img src={thumb} alt={data.title} />
       </div>

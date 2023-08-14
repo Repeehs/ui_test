@@ -17,8 +17,28 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "../../../containers/store";
 import { logout } from "../../../utilities/common";
+import { styled } from "styled-components";
 
 const drawerWidth = 240;
+
+const ContainerBox = styled(Box)`
+  position: relative;
+
+  nav:after {
+    position: absolute;
+    background: url(https://truyenaudiocv.org/themes/truyenaudiocv/images/nav-bg.png) repeat-x center;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: auto 100%;
+    height: 8px;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    width: 100%;
+    content: '';
+  }
+
+`
 
 const AppHeader = (props) => {
   const { window } = props;
@@ -41,9 +61,9 @@ const AppHeader = (props) => {
       <Divider />
       <List>
         <Button onClick={logoutHandler}>
-          <ListItem key={"Dang Xuat"} disablePadding>
+          <ListItem key={"Đăng suất"} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={"Dang Xuat"} />
+              <ListItemText primary={"Đăng xuất"} />
             </ListItemButton>
           </ListItem>
         </Button>
@@ -55,7 +75,7 @@ const AppHeader = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <ContainerBox sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         component="nav"
@@ -74,18 +94,18 @@ const AppHeader = (props) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ color: 'white', flexGrow: 1, display: { xs: "none", sm: "block",  } }}
           >
-            <Link to="/">S3LAP</Link>
+            <Link to="/"><span style={{ color: "white" }}>S3LAP</span></Link>
           </Typography>
           {isAuth && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button
-                key={"Dang Xuat"}
+                key={"Đăng xuất"}
                 sx={{ color: "#fff" }}
                 onClick={logoutHandler}
               >
-                {"Dang Xuat"}
+                {"Đăng xuất"}
               </Button>
             </Box>
           )}
@@ -111,7 +131,7 @@ const AppHeader = (props) => {
           {drawer}
         </Drawer>
       </Box>
-    </Box>
+    </ContainerBox>
   );
 };
 
