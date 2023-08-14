@@ -3,46 +3,94 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../containers/Auth/actions";
+import { useHistory } from "react-router-dom";
+import { useAppSelector } from "../../containers/store";
 
 const SignIn = () => {
+  const isAuth = useAppSelector((state) => state.authReducer.isAuth);
+  const history = useHistory();
+
+  const [authData, setAuthData] = React.useState({
+    username: {
+      value: "",
+      isError: false,
+      errMessage: "Tên đăng nhập cần ít nhất 1 ký tự",
+    },
+    password: {
+      value: "",
+      isError: false,
+      errMessage: "Mật khẩu cần ít nhất 1 ký tự",
+    },
+  });
+  console.log("login", isAuth);
+
+  React.useEffect(() => {
+    if (isAuth) {
+      history.push("/");
+    }
+  }, [isAuth, history]);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const username = data.get("username");
+    const password = data.get("password");
+    if (username !== '' && password !== '') {
+      dispatch(
+        login({
+          username: data.get("username"),
+          password: data.get("password"),
+        })
+      );
+    }
+  };
+
+  const onChangeInputHandler = (event) => {
+    const { name, value } = event.target;
+    const newAuthData = {
+      ...authData,
+      [name]: {
+        ...authData[name],
+        value: value,
+      },
+    };
+    setAuthData(newAuthData);
+  };
+
+  const checkAuthDataValid = (event) => {
+    const { name, value } = event.target;
+    if (value === "") {
+      const newAuthData = {
+        ...authData,
+        [name]: {
+          ...authData[name],
+          isError: true,
+        },
+      };
+      setAuthData(newAuthData);
+    }
+  };
+
+  const onFocusHandler = (event) => {
+    const { name } = event.target;
+    const newAuthData = {
+      ...authData,
+      [name]: {
+        ...authData[name],
+        isError: false,
+      },
+    };
+    setAuthData(newAuthData);
   };
 
   return (
@@ -78,7 +126,7 @@ const SignIn = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Đăng nhập
           </Typography>
           <Box
             component="form"
@@ -90,47 +138,44 @@ const SignIn = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Tên đăng nhập"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onBlur={checkAuthDataValid}
+              onFocus={onFocusHandler}
+              value={authData.username.value}
+              error={authData.username.isError}
+              onChange={onChangeInputHandler}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Mật khẩu"
               type="password"
               id="password"
               autoComplete="current-password"
+              onFocus={onFocusHandler}
+              onBlur={checkAuthDataValid}
+              value={authData.password.value}
+              error={authData.password.isError}
+              onChange={onChangeInputHandler}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Đăng nhập
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
       </Grid>
