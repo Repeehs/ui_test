@@ -4,8 +4,20 @@ import Books from "./pages/books";
 import SignIn from "./pages/signIn";
 import { useAppSelector } from "./containers/store";
 import { useEffect } from "react";
+import { getToken } from "./utilities/cookies";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "./containers/Auth/actions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = getToken();
+    if(token) {
+      dispatch(loginSuccess());
+    }
+    console.log(token);
+  }, [])
   return (
     <>
       <BrowserRouter>

@@ -9,7 +9,6 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import { styled } from "styled-components";
-import Button from "@mui/material/Button";
 
 const SwiperContainer = styled("div")`
   .swiper {
@@ -102,7 +101,7 @@ export default function CustomImageSlider(props) {
         <p className="description">
           Tác giả <span>{currentBook.title}</span>
         </p>
-        <Button variant="text">Xem chi tiết</Button>
+        {/* <Button variant="text">Xem chi tiết</Button> */}
       </div>
     </SwiperContainer>
   );

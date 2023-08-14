@@ -15,16 +15,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../containers/Auth/actions";
 import { useAppSelector } from "../../../containers/store";
+import { logout } from "../../../utilities/common";
 
 const drawerWidth = 240;
-const navItems = [
-  {
-    title: "Dang Xuat",
-    url: "/sign-in",
-  },
-];
 
 const AppHeader = (props) => {
   const { window } = props;

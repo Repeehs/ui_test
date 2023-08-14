@@ -2,13 +2,20 @@ import { useState } from "react";
 import CustomPagination from "../CustomPagination";
 import Book from "./Book";
 import { styled } from "styled-components";
-import { listBook } from "../../../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import BookModal from "../modal/BookModal";
+import { changePage } from "../../../containers/Book/actions";
 
-const ListBookContainer = styled('div')`
+const ListBookContainer = styled("div")`
   .block-header {
     color: #6b9876;
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     .title {
       margin: 0;
       font-size: 24px;
@@ -18,28 +25,41 @@ const ListBookContainer = styled('div')`
       font-weight: 500;
     }
   }
-`
+`;
 
 const ListBooks = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [openCreate, setOpenCreate] = useState(false);
+  const dispatch = useDispatch();
 
+  const { books, pages } = useSelector((state) => state.bookReducer);
   const changePageHandler = (event, value) => {
-    setCurrentPage(value);
+    dispatch(changePage(value));
   };
 
+  const handlerOpenCreateModal = (value) => {
+    setOpenCreate(value);
+  };
   return (
     <ListBookContainer>
       <div class="block-header">
         <h2 class="title">Mới cập nhật</h2>
+        <div>
+          <Button variant="text" onClick={() => setOpenCreate(true)}>
+            Thêm mới
+          </Button>
+        </div>
       </div>
-      {listBook.map((item) => (
+      {books?.map((item) => (
         <Book data={item} />
       ))}
-      <CustomPagination
-        totalPage={5}
-        currentPage={currentPage}
-        changePageHandler={changePageHandler}
-      />
+      {pages?.total > 1 && (
+        <CustomPagination
+          totalPage={pages?.total}
+          currentPage={pages.current}
+          changePageHandler={changePageHandler}
+        />
+      )}
+      <BookModal isOpen={openCreate} setOpen={handlerOpenCreateModal} />
     </ListBookContainer>
   );
 };

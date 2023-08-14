@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { timeSince } from "../../../../utils/timeSince";
 
-const BookContainer = styled('div')`
+const BookContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,14 +50,16 @@ const BookContainer = styled('div')`
     line-height: 25px;
     float: left;
   }
-`
+`;
 
 const Book = (props) => {
   const { data } = props;
+  const thumb =
+    "https://truyenaudiocv.org/uploads/manga/nguoi-tai-dau-pha-viet-nhat-ky-nu-chinh-toan-bo-mong/cover/cover_thumb.jpg";
   return (
     <BookContainer>
       <div className="img-box">
-        <img src={data.thumb} alt={data.title} />
+        <img src={thumb} alt={data.title} />
       </div>
       <h2 className="book-title">{data.title}</h2>
       <p className="part-number">{data.parts} tập</p>

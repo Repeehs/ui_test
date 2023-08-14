@@ -12,7 +12,4 @@ export const loginSuccess = (data) => ({
   data,
 });
 
-export const logout = () => ({
-  type: AUTH.AUTH_LOGOUT,
-});
 
