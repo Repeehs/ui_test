@@ -13,25 +13,32 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../containers/Auth/actions";
+import { useAppSelector } from "../../../containers/store";
 
 const drawerWidth = 240;
 const navItems = [
   {
-    title: "Dang Nhap",
+    title: "Dang Xuat",
     url: "/sign-in",
   },
 ];
 
-
 const AppHeader = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const isAuth = useAppSelector((state) => state.authReducer.isAuth);
+  const dispatch = useDispatch();
+  
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -39,15 +46,13 @@ const AppHeader = (props) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <Link to={item.url}>
-            <ListItem key={item.title} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+        <Button onClick={logoutHandler}>
+          <ListItem key={"Dang Xuat"} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={"Dang Xuat"} />
+            </ListItemButton>
+          </ListItem>
+        </Button>
       </List>
     </Box>
   );
@@ -79,15 +84,17 @@ const AppHeader = (props) => {
           >
             <Link to="/">S3LAP</Link>
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Link to={item.url}>
-                <Button key={item.title} sx={{ color: "#fff" }}>
-                  {item.title}
-                </Button>
-              </Link>
-            ))}
-          </Box>
+          {isAuth && (
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Button
+                key={"Dang Xuat"}
+                sx={{ color: "#fff" }}
+                onClick={logoutHandler}
+              >
+                {"Dang Xuat"}
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <Box component="nav">

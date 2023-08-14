@@ -1,13 +1,18 @@
 import { AUTH } from "./constants";
 
-export const getExample = (ms) => ({
+export const login = ({ username, password }) => ({
   type: AUTH.AUTH_LOGIN,
-  ms: ms
+  username,
+  password
 });
 
 
-export const getExampleSuccess = (data) => ({
+export const loginSuccess = (data) => ({
   type: AUTH.AUTH_LOGIN_SUCCESS,
   data,
+});
+
+export const logout = () => ({
+  type: AUTH.AUTH_LOGOUT,
 });
 

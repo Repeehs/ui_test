@@ -2,14 +2,22 @@ import { AUTH } from "./constants";
 
 const initialState = {
   data: {},
-  isLogin: false
+  isAuth: false,
 };
 
-export default function app(state = initialState, action)  {
+export default function app(state = initialState, action) {
+  console.log('authReducer', action)
   switch (action.type) {
     case AUTH.AUTH_LOGIN_SUCCESS:
-      state.isLogin = true;
-      return state
+      return {
+        ...state,
+        isAuth: true,
+      };
+    case AUTH.AUTH_LOGOUT:
+      return {
+        ...state,
+        isAuth: false,
+      };
     default:
       return state;
   }
