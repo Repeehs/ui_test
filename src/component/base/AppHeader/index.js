@@ -26,7 +26,8 @@ const ContainerBox = styled(Box)`
 
   nav:after {
     position: absolute;
-    background: url(https://truyenaudiocv.org/themes/truyenaudiocv/images/nav-bg.png) repeat-x center;
+    background: url(https://truyenaudiocv.org/themes/truyenaudiocv/images/nav-bg.png)
+      repeat-x center;
     -moz-background-size: auto 100%;
     -o-background-size: auto 100%;
     background-size: auto 100%;
@@ -35,17 +36,16 @@ const ContainerBox = styled(Box)`
     right: 0;
     bottom: -8px;
     width: 100%;
-    content: '';
+    content: "";
   }
-
-`
+`;
 
 const AppHeader = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isAuth = useAppSelector((state) => state.authReducer.isAuth);
   const dispatch = useDispatch();
-  
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -56,18 +56,20 @@ const AppHeader = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        S3LAP
       </Typography>
       <Divider />
-      <List>
-        <Button onClick={logoutHandler}>
-          <ListItem key={"Đăng suất"} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={"Đăng xuất"} />
-            </ListItemButton>
-          </ListItem>
-        </Button>
-      </List>
+      {isAuth && (
+        <List>
+          <Button onClick={logoutHandler}>
+            <ListItem key={"Đăng suất"} disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={"Đăng xuất"} />
+              </ListItemButton>
+            </ListItem>
+          </Button>
+        </List>
+      )}
     </Box>
   );
 
@@ -94,9 +96,15 @@ const AppHeader = (props) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ color: 'white', flexGrow: 1, display: { xs: "none", sm: "block",  } }}
+            sx={{
+              color: "white",
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+            }}
           >
-            <Link to="/"><span style={{ color: "white" }}>S3LAP</span></Link>
+            <Link to="/">
+              <span style={{ color: "white" }}>S3LAP</span>
+            </Link>
           </Typography>
           {isAuth && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
