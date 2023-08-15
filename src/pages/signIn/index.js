@@ -26,7 +26,6 @@ const SignIn = () => {
       errMessage: "Mật khẩu cần ít nhất 1 ký tự",
     },
   });
-  console.log("login", isAuth);
 
   React.useEffect(() => {
     if (isAuth) {

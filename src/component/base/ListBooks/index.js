@@ -49,7 +49,6 @@ const ListBooks = () => {
   };
 
   const onClickHandler = (item) => {
-    console.log("item", item);
     setCurrentBook(item);
     setOpenEditDelete(true);
   };

@@ -16,7 +16,6 @@ function App() {
     if(token) {
       dispatch(loginSuccess());
     }
-    console.log(token);
   }, [])
   return (
     <>
