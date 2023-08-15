@@ -26,6 +26,10 @@ const ListBookContainer = styled("div")`
       font-weight: 500;
     }
   }
+
+  .list-book {
+    min-height: 330px;
+  }
 `;
 
 const ListBooks = () => {
@@ -45,7 +49,7 @@ const ListBooks = () => {
   };
 
   const onClickHandler = (item) => {
-    console.log('item', item)
+    console.log("item", item);
     setCurrentBook(item);
     setOpenEditDelete(true);
   };
@@ -65,9 +69,12 @@ const ListBooks = () => {
           </Button>
         </div>
       </div>
-      {books?.map((item) => (
-        <Book data={item} click={onClickHandler} />
-      ))}
+      <div className="list-book">
+        {books?.map((item) => (
+          <Book data={item} click={onClickHandler} />
+        ))}
+      </div>
+
       {pages?.total > 1 && (
         <CustomPagination
           totalPage={pages?.total}
@@ -76,7 +83,13 @@ const ListBooks = () => {
         />
       )}
       <BookModal isOpen={openCreate} setOpen={handlerOpenCreateModal} />
-      {currentBook && <BookModalUpdate isOpen={openEditDelete} setOpen={handlerOpenEDModal} book={currentBook} />}
+      {currentBook && (
+        <BookModalUpdate
+          isOpen={openEditDelete}
+          setOpen={handlerOpenEDModal}
+          book={currentBook}
+        />
+      )}
     </ListBookContainer>
   );
 };
